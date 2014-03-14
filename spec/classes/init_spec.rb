@@ -9,7 +9,24 @@ describe "hadoop::init" do
          :operatingsystem => 'CentOS'
       }
     end
-    it { should create_user('hdfs').with_uid('102')}
+      
+    #group
+	it { should create_group('hadoop').with_gid('123')  }
+	      
+	#user	      
+    it do should create_user('hdfs').with(
+    	'uid' => '102',
+    	'ensure' => 'present',
+    	'gid' => '124',
+		'shell' => '/bin/bash',
+		'home' => '/home/hduser',
+		'require' => 'Group[hadoop]'	
+    	) end    
   end
-end
+  
+  #verify repo
+  
+
+end   
+  		
 

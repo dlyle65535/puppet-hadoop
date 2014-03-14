@@ -7,19 +7,17 @@ class hadoop::init {
 	include hadoop::cluster::master
 	include hadoop::cluster::slave
 
-        Exec { path => "/bin" }
-
 	group { "hadoop":
 		ensure => present,
-		gid => "800"
+		gid => "123"
 	}
 
 	user { "hdfs":
 		ensure => present,
 		comment => "Hadoop",
 		password => "!!",
-		uid => "800",
-		gid => "800",
+		uid => "102",
+		gid => "124",
 		shell => "/bin/bash",
 		home => "/home/hduser",
 		require => Group["hadoop"],
@@ -67,16 +65,7 @@ class hadoop::init {
 		require => File["hadoop-base"]
 	}
 	
-	exec { "untar hadoop-${hadoop::params::version}.tar.gz":
-		command => "tar -zxf hadoop-${hadoop::params::version}.tar.gz",
-		cwd => "${hadoop::params::hadoop_base}",
-		creates => "${hadoop::params::hadoop_base}/hadoop-${hadoop::params::version}",
-		alias => "untar-hadoop",
-		refreshonly => true,
-		subscribe => File["hadoop-source-tgz"],
-		user => "hduser",
-		before => [ File["hadoop-symlink"], File["hadoop-app-dir"]]
-	}
+	
 	file { "${hadoop::params::hadoop_base}/hadoop-${hadoop::params::version}":
 		ensure => "directory",
 		mode => 0644,
