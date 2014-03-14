@@ -21,10 +21,22 @@ describe "hadoop::init" do
 		'shell' => '/bin/bash',
 		'home' => '/home/hduser',
 		'require' => 'Group[hadoop]'	
-    	) end    
-  end
+    	) end  
+    	
+	it do should create_package('hadoop-0.20').with(
+    	'ensure' => 'present',
+    	'name' => 'hadoop-0.20'
+		) end	  
   
-  #verify repo
+	it do should create_package('hadoop-0.20-native').with(
+    	'ensure' => 'present',
+    	'name' => 'hadoop-0.20-native'
+		) end	  
+ 	
+  	#verify repo
+  	#verify files	
+  	end #context
+  
   
 
 end   

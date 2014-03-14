@@ -23,6 +23,13 @@ class hadoop::init {
 		require => Group["hadoop"],
 	}
 	
+	package { "hadoop-0.20":
+    ensure => present
+  }
+  
+  package { "hadoop-0.20-native":
+    ensure => present
+  }
 	file { "/home/hduser/.bash_profile":
 		ensure => present,
 		owner => "hduser",
