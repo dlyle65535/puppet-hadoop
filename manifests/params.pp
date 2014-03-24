@@ -30,9 +30,9 @@ class hadoop::params {
 		default			=> "${java::params::java_base}/jdk${java::params::java_version}",
 	}
 	$hadoop_base = $::hostname ? {
-		default			=> "/opt/hadoop",
+		default			=> "/etc/hadoop-0.20",
 	}
 	$hdfs_path = $::hostname ? {
-		default			=> "/home/hduser/hdfs",
+		default			=> "/home/hdfs/hdfs",
 	}
 }
