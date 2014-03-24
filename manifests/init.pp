@@ -49,7 +49,13 @@ class hadoop::init {
 		content => template("hadoop/conf/hdfs-site.xml.erb"),
 	}
 	
-	
+  file { "${hadoop::params::hadoop_base}/conf/mapred-site.xml":
+    owner => "hdfs",
+    group => "hadoop",
+    mode => "644",
+    alias => "mapred-site-xml",
+    content => template("hadoop/conf/mapred-site.xml.erb"),
+  }	
 	
 	
 	

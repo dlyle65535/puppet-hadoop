@@ -3,36 +3,57 @@
 class hadoop::params {
 
 	include java::params
-
-	$version = $::hostname ? {
-		default			=> "0.20.203.0",
+  
+	$version = $::hadoop_node_version ? {
+		undef			=> "0.20.203.0",
+		default => $::hadoop_node_version,
 	}
         
-	$master = $::hostname ? {
-		default			=> "hadoop01",
+	$master = $::hadoop_node_master ? {
+		undef			=> "hadoop01",
+		default => $::hadoop_node_master,
 	}
         
-	$slaves = $::hostname ? {
-		default			=> [hadoop01, hadoop-02, hadoop-03] 
-	}
-	$hdfsport = $::hostname ? {
-		default			=> "8020",
+	$hdfsport = $::hadoop_node_hdfsport ? {
+		undef			=> "8020",
+		default => $::hadoop_node_hdfsport,
 	}
 
-	$replication = $::hostname ? {
-		default			=> "3",
+	$replication = $::hadoop_node_replication ? {
+		undef			=> "3",
+		default => $::hadoop_node_replication,
 	}
 
-	$jobtrackerport = $::hostname ? {
-		default			=> "8021",
+	$jobtrackerport = $::hadoop_node_jobtrackerport ? {
+		undef			=> "8021",
+    default => $::hadoop_node_jobtrackerport,
 	}
-	$java_home = $::hostname ? {
-		default			=> "${java::params::java_base}/jdk${java::params::java_version}",
+	
+
+	$java_home = $::hadoop_node_java_home ? {
+		undef			=> "${java::params::java_base}/jdk${java::params::java_version}",
+		default => $::hadoop_node_java_home,
 	}
-	$hadoop_base = $::hostname ? {
-		default			=> "/etc/hadoop-0.20",
+	
+	$hadoop_base = $::hadoop_node_hadoop_base ? {
+		undef			=> "/etc/hadoop-0.20",
+    default => $::hadoop_node_hadoop_base,
 	}
-	$hdfs_path = $::hostname ? {
-		default			=> '/data/tmp/hadoop-${user.name}',
+
+	$hdfs_path = $::hadoop_node_hdfs_path ? {
+		undef => '/data/tmp/hadoop-${user.name}',
+    default => $::hadoop_node_hdfs_path,		
 	}
+	
+ $job_tracker_http_server = $::hadoop_node_job_tracker_http_server ? {
+    undef => 'hadoop01',
+    default => $::hadoop_node_job_tracker_http_server,
+  }
+
+  $job_tracker_http_port = $::hadoop_node_job_tracker_http_port ? {
+    undef => '8022',
+    default => $::hadoop_node_job_tracker_http_port,  
+  }
+    
 }
+

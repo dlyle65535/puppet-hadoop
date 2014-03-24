@@ -3,22 +3,6 @@ require 'spec_helper'
 
 describe "hadoop::init" do
   
-  
-      
-	let :default_params do
-    {
-      :version => '0.20.203.0',
-      :master => 'hadoop01',
-      :slaves => [hadoop01, hadoop-02, hadoop-03],
-      :hdfsport => '8020',
-      :replication => '3',
-      :jobtrackerport => '8021',
-      :java_home => '/foo/jdk0.1.0',
-      :hadoop_base => '/opt/hadoop',
-      :hdfs_path => '/data/tmp/hadoop-${user.name}',
-    }
- 	end          
-  
   context "CentOS" do
     
      let :facts do
@@ -36,22 +20,22 @@ describe "hadoop::init" do
 	      
 	#user	      
     it do should create_user('hdfs').with(
-    	'uid' => '102',
-    	'ensure' => 'present',
-    	'gid' => '124',
-		'shell' => '/bin/bash',
-		'home' => '/home/hduser',
-		'require' => 'Group[hadoop]'	
+    	:uid => '102',
+    	:ensure => 'present',
+    	:gid => '124',
+		:shell => '/bin/bash',
+		:home => '/home/hduser',
+		:require => 'Group[hadoop]'	
     	) end  
     	
 	it do should create_package('hadoop-0.20').with(
-    	'ensure' => 'present',
-    	'name' => 'hadoop-0.20'
+    	:ensure => 'present',
+    	:name => 'hadoop-0.20'
 		) end	  
   
 	it do should create_package('hadoop-0.20-native').with(
-    	'ensure' => 'present',
-    	'name' => 'hadoop-0.20-native'
+    	:ensure => 'present',
+    	:name => 'hadoop-0.20-native'
 		) end	  
  	
  	
@@ -83,6 +67,16 @@ describe "hadoop::init" do
 	end	  		
 	
     #mapred-site.xml
+	it do 
+		should contain_file('/etc/hadoop-0.20/conf/mapred-site.xml').with(
+			:owner => "hdfs",
+			:group => "hadoop",
+			:mode => "644",
+			:alias => "mapred-site-xml"
+		) 
+		should contain_file('/etc/hadoop-0.20/conf/mapred-site.xml').with_content(/<name>mapred.job.tracker<\/name>\n\t<value>hadoop01:8021/)		
+		should contain_file('/etc/hadoop-0.20/conf/mapred-site.xml').with_content(/<name>mapreduce.jobtracker.http.address<\/name>\n\t<value>hadoop01:8022/)
+	end	  		
     #hadoop-env.sh    
     
     #maybes
