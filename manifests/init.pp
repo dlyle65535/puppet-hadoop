@@ -2,11 +2,12 @@
 class hadoop::init {
 
 	require hadoop::params
-	require hadoop::cluster
+	
+	#include hadoop::cluster::master
+	#include hadoop::cluster::slave
 
-	include hadoop::cluster::master
-	include hadoop::cluster::slave
-
+  #contain repos
+  
 	group { "hadoop":
 		ensure => present,
 		gid => "123"

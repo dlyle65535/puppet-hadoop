@@ -29,6 +29,7 @@ describe "hadoop::init" do
     end
        
     it { should contain_class('hadoop::params') }
+    #it { should contain_class('repos') }
     
     #group
 	it { should create_group('hadoop').with_gid('123')  }
