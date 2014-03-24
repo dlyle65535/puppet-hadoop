@@ -33,6 +33,6 @@ class hadoop::params {
 		default			=> "/etc/hadoop-0.20",
 	}
 	$hdfs_path = $::hostname ? {
-		default			=> "/home/hdfs/hdfs",
+		default			=> '/data/tmp/hadoop-${user.name}',
 	}
 }

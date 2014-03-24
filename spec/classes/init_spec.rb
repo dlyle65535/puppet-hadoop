@@ -15,7 +15,7 @@ describe "hadoop::init" do
       :jobtrackerport => '8021',
       :java_home => '/foo/jdk0.1.0',
       :hadoop_base => '/opt/hadoop',
-      :hdfs_path => '/home/hduser/hdfs',
+      :hdfs_path => '/data/tmp/hadoop-${user.name}',
     }
  	end          
   
@@ -55,17 +55,41 @@ describe "hadoop::init" do
  	
  	
   	#verify repo
+  	
   	#verify files
-	it do should contain_file('/etc/hadoop-0.20/conf/core-site.xml').with(
-		:owner => "hdfs",
-		:group => "hadoop",
-		:mode => "644",
-		:alias => "core-site-xml"
-		) end
-	  		
+  	
+  	#core-site.xml
+	it do 
+		should contain_file('/etc/hadoop-0.20/conf/core-site.xml').with(
+			:owner => "hdfs",
+			:group => "hadoop",
+			:mode => "644",
+			:alias => "core-site-xml"
+		) 
+		should contain_file('/etc/hadoop-0.20/conf/core-site.xml').with_content(/<name>fs.default.name<\/name>\n\t<value>hdfs:\/\/hadoop01:8020/)
+		should contain_file('/etc/hadoop-0.20/conf/core-site.xml').with_content(/<name>hadoop.tmp.dir<\/name>\n\t<value>\/data\/tmp\/hadoop\-\$\{user.name\}/)
+	end	  		
+	
+    #hdfs-site.xml
+    it do 
+		should contain_file('/etc/hadoop-0.20/conf/hdfs-site.xml').with(
+			:owner => "hdfs",
+			:group => "hadoop",
+			:mode => "644",
+			:alias => "hdfs-site-xml"
+		) 
+		should contain_file('/etc/hadoop-0.20/conf/hdfs-site.xml').with_content(/<name>dfs.replication<\/name>\n\t<value>3/)		
+	end	  		
+	
+    #mapred-site.xml
+    #hadoop-env.sh    
     
+    #maybes
+    #fair-secheduler.xml
+    #capacity-scheduler.xml
+    #ssh-keys
     
-        
+	        
   	end #context
   end   
   		
