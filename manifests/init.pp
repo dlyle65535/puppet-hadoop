@@ -57,7 +57,13 @@ class hadoop::init {
     content => template("hadoop/conf/mapred-site.xml.erb"),
   }	
 	
-	
+	  file { "${hadoop::params::hadoop_base}/conf/hadoop-env.sh":
+    owner => "hdfs",
+    group => "hadoop",
+    mode => "644",
+    alias => "hadoop-env-sh",
+    content => template("hadoop/conf/hadoop-env.sh.erb"),
+  } 
 	
 #	file { "/home/hduser/.ssh/":
 #		owner => "hduser",

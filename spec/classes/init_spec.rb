@@ -78,7 +78,16 @@ describe "hadoop::init" do
 		should contain_file('/etc/hadoop-0.20/conf/mapred-site.xml').with_content(/<name>mapreduce.jobtracker.http.address<\/name>\n\t<value>hadoop01:8022/)
 	end	  		
     #hadoop-env.sh    
-    
+    it do 
+		should contain_file('/etc/hadoop-0.20/conf/hadoop-env.sh').with(
+			:owner => "hdfs",
+			:group => "hadoop",
+			:mode => "644",
+			:alias => "hadoop-env-sh"
+		) 
+		should contain_file('/etc/hadoop-0.20/conf/hadoop-env.sh').with_content(/export JAVA_HOME=\/jdk/)		
+	end	  		
+	
     #maybes
     #fair-secheduler.xml
     #capacity-scheduler.xml
