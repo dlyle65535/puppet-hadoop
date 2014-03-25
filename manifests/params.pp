@@ -54,6 +54,26 @@ class hadoop::params {
     undef => '8022',
     default => $::hadoop_node_job_tracker_http_port,  
   }
-    
+   
+  $env_heapsize = $::hadoop_env_heapsize ? {
+    undef => '1000',
+    default => $::hadoop_env_heapsize,  
+  } 
+   
+  $env_jobtracker_opts = $::hadoop_env_jobtracker_opts ? {
+    undef => '-Xmx4g',
+    default => $::hadoop_env_jobtracker_opts,  
+  }  
+  
+    $env_namenode_opts = $::hadoop_env_namenode_opts ? {
+    undef => '-Xmx4g',
+    default => $::hadoop_env_namenode_opts,  
+  }  
+  
+    $env_secondarynamenode_opts = $::hadoop_env_secondarynamenode_opts ? {
+    undef => '-Xmx4g',
+    default => $::hadoop_env_secondarynamenode_opts,  
+  }  
+  
 }
 

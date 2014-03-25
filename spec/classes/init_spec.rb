@@ -85,7 +85,11 @@ describe "hadoop::init" do
 			:mode => "644",
 			:alias => "hadoop-env-sh"
 		) 
-		should contain_file('/etc/hadoop-0.20/conf/hadoop-env.sh').with_content(/export JAVA_HOME=\/jdk/)		
+		should contain_file('/etc/hadoop-0.20/conf/hadoop-env.sh').with_content(/export JAVA_HOME=\/jdk/)
+		should contain_file('/etc/hadoop-0.20/conf/hadoop-env.sh').with_content(/export HADOOP_HEAPSIZE=1000/)
+		should contain_file('/etc/hadoop-0.20/conf/hadoop-env.sh').with_content(/export HADOOP_JOBTRACKER_OPTS=-Xmx4g/)
+		should contain_file('/etc/hadoop-0.20/conf/hadoop-env.sh').with_content(/export HADOOP_NAMENODE_OPTS=-Xmx4g/)
+		should contain_file('/etc/hadoop-0.20/conf/hadoop-env.sh').with_content(/export HADOOP_SECONDARYNAMENODE_OPTS=-Xmx4g/)
 	end	  		
 	
     #maybes
