@@ -3,11 +3,43 @@
 <configuration>
 <property>
 	<name>hadoop.tmp.dir</name>
-	<value><%= scope.lookupvar('hadoop::params::hdfs_path') %></value>
+	<value><%= scope.lookupvar('hadoop::params::tmp_dir') %></value>
   <description>A base for other temporary directories.</description>
 </property>
 <property>
 	<name>fs.default.name</name>
 	<value>hdfs://<%= scope.lookupvar('hadoop::params::master') %>:<%= scope.lookupvar('hadoop::params::hdfsport') %></value>
+</property>
+<property>
+	<name>io.file.buffer.size</name>
+	<value><%= scope.lookupvar('hadoop::params::file_buffer_size') %></value>
+</property>
+<property>
+	<name>webinterface.private.actions</name>
+	<value><%= scope.lookupvar('hadoop::params::enable_private_actions') %></value>
+</property>
+<property>
+	<name>io.compression.codecs</name>
+	<value><%= scope.lookupvar('hadoop::params::compression_codecs') %></value>
+</property>
+<property>
+	<name>io.compression.codec.lzo.class</name>
+	<value><%= scope.lookupvar('hadoop::params::lzo_class') %></value>
+</property>
+<property>
+	<name>mapred.compress.map.output</name>
+	<value><%= scope.lookupvar('hadoop::params::compress_map_output') %></value>
+</property>
+<property>
+	<name>topology.script.file.name</name>
+	<value><%= scope.lookupvar('hadoop::params::topology_script_file_name') %></value>
+</property>
+<property>
+	<name>hadoop.proxyuser.oozie.hosts</name>
+	<value><%= scope.lookupvar('hadoop::params::oozie_hosts') %></value>
+</property>
+<property>
+	<name>hadoop.proxyuser.oozie.groups</name>
+	<value><%= scope.lookupvar('hadoop::params::oozie_groups') %></value>
 </property>
 </configuration>

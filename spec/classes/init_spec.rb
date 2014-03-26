@@ -51,8 +51,16 @@ describe "hadoop::init" do
 			:mode => "644",
 			:alias => "core-site-xml"
 		) 
-		should contain_file('/etc/hadoop-0.20/conf/core-site.xml').with_content(/<name>fs.default.name<\/name>\n\t<value>hdfs:\/\/hadoop01:8020/)
+		should contain_file('/etc/hadoop-0.20/conf/core-site.xml').with_content(/<name>fs.default.name<\/name>\n\t<value>hdfs:\/\/hadoop01:8020/)		
+		should contain_file('/etc/hadoop-0.20/conf/core-site.xml').with_content(/<name>io.file.buffer.size<\/name>\n\t<value>131072/)
 		should contain_file('/etc/hadoop-0.20/conf/core-site.xml').with_content(/<name>hadoop.tmp.dir<\/name>\n\t<value>\/data\/tmp\/hadoop\-\$\{user.name\}/)
+		should contain_file('/etc/hadoop-0.20/conf/core-site.xml').with_content(/<name>webinterface.private.actions<\/name>\n\t<value>false/)		
+		should contain_file('/etc/hadoop-0.20/conf/core-site.xml').with_content(/<name>io.compression.codecs<\/name>\n\t<value>com.hadoop.compression.lzo.LzopCodec/)
+		should contain_file('/etc/hadoop-0.20/conf/core-site.xml').with_content(/<name>io.compression.codec.lzo.class<\/name>\n\t<value>com.hadoop.compression.lzo.LzoCodec/)
+		should contain_file('/etc/hadoop-0.20/conf/core-site.xml').with_content(/<name>mapred.compress.map.output<\/name>\n\t<value>true/)
+		should contain_file('/etc/hadoop-0.20/conf/core-site.xml').with_content(/<name>topology.script.file.name<\/name>\n\t<value><\/value>/)
+		should contain_file('/etc/hadoop-0.20/conf/core-site.xml').with_content(/<name>hadoop.proxyuser.oozie.hosts<\/name>\n\t<value>\*/)
+		should contain_file('/etc/hadoop-0.20/conf/core-site.xml').with_content(/<name>hadoop.proxyuser.oozie.groups<\/name>\n\t<value>\*/)
 	end	  		
 	
     #hdfs-site.xml

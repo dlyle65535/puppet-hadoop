@@ -40,11 +40,51 @@ class hadoop::params {
     default => $::hadoop_node_hadoop_base,
 	}
 
-	$hdfs_path = $::hadoop_node_hdfs_path ? {
-		undef => '/data/tmp/hadoop-${user.name}',
-    default => $::hadoop_node_hdfs_path,		
-	}
-	
+   $file_buffer_size = $::hadoop_file_buffer_size ? {
+    undef => '131072',
+    default => $::hadoop_file_buffer_size,   
+  }
+  
+  $tmp_dir = $::hadoop_tmp_dir ? {
+    undef => '/data/tmp/hadoop-${user.name}',
+    default => $::hadoop_tmp_dir,   
+  }
+  
+  $enable_private_actions = $::hadoop_enable_private_actions ? {
+    undef => 'false',
+    default => $::hadoop_enable_private_actions,   
+  }
+        
+  $compression_codecs = $::hadoop_compression_codecs ? {
+    undef => 'com.hadoop.compression.lzo.LzopCodec',
+    default => $::hadoop_compression_codecs,   
+  }
+   
+  $lzo_class = $::hadoop_lzo_class ? {
+    undef => 'com.hadoop.compression.lzo.LzoCodec',
+    default => $::hadoop_lzo_class,   
+  }
+         	
+  $compress_map_output = $::hadoop_compress_map_output ? {
+    undef => 'true',
+    default => $::hadoop_compress_map_output,   
+  }
+         	
+  $topology_script_file_name = $::hadoop_topology_script_file_name ? {
+    undef => '',
+    default => $::hadoop_topology_script_file_name,   
+  }
+
+  $oozie_hosts = $::hadoop_oozie_hosts ? {
+    undef => '*',
+    default => $::hadoop_oozie_hosts,   
+  }
+  
+  $oozie_groups = $::hadoop_oozie_groups ? {
+    undef => '*',
+    default => $::hadoop_oozie_groups,   
+  }
+   
  $job_tracker_http_server = $::hadoop_node_job_tracker_http_server ? {
     undef => 'hadoop01',
     default => $::hadoop_node_job_tracker_http_server,
