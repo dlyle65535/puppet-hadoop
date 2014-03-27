@@ -65,6 +65,15 @@ class hadoop::init {
     content => template("hadoop/conf/hadoop-env.sh.erb"),
   } 
 	
+  file { "${hadoop::params::hadoop_base}/conf/fair-scheduler.xml":
+   ensure => present,
+   owner => "hdfs",
+   group => "hadoop",
+   mode => "644",
+   alias => "fair-scheduler-xml",
+   source => "puppet:///modules/puppet-hadoop/fair-scheduler.xml", 
+ }
+
 #	file { "/home/hduser/.ssh/":
 #		owner => "hduser",
 #		group => "hadoop",
