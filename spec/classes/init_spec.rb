@@ -122,8 +122,8 @@ describe "hadoop::init" do
 		)
 	}	  		
 	
-    #maybes
-    #fair-secheduler.xml
+
+  #fair-secheduler.xml
   it { 
     should contain_file('/etc/hadoop-0.20/conf/fair-scheduler.xml').with(
       :owner => "hdfs",
@@ -132,6 +132,8 @@ describe "hadoop::init" do
       :alias => "fair-scheduler-xml"
     )    
   }
+
+
     #capacity-scheduler.xml
     #ssh-keys
     
