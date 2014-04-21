@@ -2,11 +2,9 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <configuration>
 <property>
-  <name>mapred.job.tracker</name>
-  <value><%= scope.lookupvar('hadoop::params::master') %>:<%= scope.lookupvar('hadoop::params::jobtrackerport') %></value>
-  <description>The host and port that the MapReduce job tracker runs
-  at.  If "local", then jobs are run in-process as a single map
-  and reduce task.
-  </description>
+	<name>mapred.job.tracker</name>
+	<value><%= scope.lookupvar('hadoop::params::master') %>:<%= scope.lookupvar('hadoop::params::jobtrackerport') %></value>
+	<name>mapreduce.jobtracker.http.address</name>
+	<value><%= scope.lookupvar('hadoop::params::job_tracker_http_server') %>:<%= scope.lookupvar('hadoop::params::job_tracker_http_port') %></value> 
 </property>
 </configuration>
